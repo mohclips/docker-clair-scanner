@@ -1,0 +1,41 @@
+version: "3.7"
+
+#docker run -p 5432:5432 -d --name db arminc/clair-db
+#docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan
+
+# run: (dont use the container ip or localhost ip)
+# ./clair-scanner --ip <local_node_ip_address> --report=cc128.json --all --log=cc128.log cc128
+
+
+services:
+  clair-db:
+    image: arminc/clair-db
+    # must be called "postgres" for local dns purposes (or this won't work)
+    container_name: postgres
+    ports:
+      - 5432:5432
+
+  clair-local-scan:
+    image: arminc/clair-local-scan
+    container_name: clair-local-scan
+    ports:
+      - 6060:6060
+
+    depends_on: 
+      - clair-db
+
+  clair-reports:
+    image: nginx:alpine
+    container_name: clair-reports
+    ports:
+      - 6061:80
+
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./reports/html:/www
+  
+
+
+
+  
+

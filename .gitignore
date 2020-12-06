@@ -1,0 +1,7 @@
+old/
+local-dev/
+*.html
+*.json
+*.log
+clair-scanner
+clairctl
