@@ -37,7 +37,7 @@ Reports are saved the local node, these are accessible from the nginx container.
 
 This just a directory listing on the html reports. Nothing fancy. :)
 
-
+![report image](images/report1.png)
 
 
 Have fun!
